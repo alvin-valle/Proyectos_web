@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>itera.dev - Métodos Numéricos</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <!-- Modal de Bienvenida -->
+    <div id="welcomeModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>¡Bienvenido a itera.dev! 🚀</h2>
+            <p>La plataforma interactiva y definitiva para resolver y graficar métodos numéricos.</p>
+            <ul>
+                <li>📊 Evaluaciones en tiempo real</li>
+                <li>📈 Gráficas interactivas</li>
+                <li>📥 Exportación de resultados a Excel</li>
+            </ul>
+            <button class="btn btn-primary" onclick="closeModal()">Aceptar y Comenzar</button>
+        </div>
+    </div>
+
+    <!-- Menú Lateral -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>itera.dev</h2>
+            <p>Métodos Numéricos</p>
+        </div>
+        
+        <ul class="menu">
+            <li class="menu-item">
+                <details>
+                    <summary>Opción 1: Soluciones No Lineales</summary>
+                    <ul>
+                        <li><a href="#" onclick="loadMethod('bolzano')">Teorema de Bolzano</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li class="menu-item">
+                <details open>
+                    <summary>Opción 2: Raíces Cerradas y Abiertas</summary>
+                    <ul>
+                        <li class="sub-title">Métodos Cerrados</li>
+                        <li><a href="#" onclick="loadMethod('biseccion')">Método de Bisección</a></li>
+                        <li><a href="#" onclick="loadMethod('regla_falsa')">Regla Falsa</a></li>
+                        <li><a href="#" onclick="loadMethod('muller')">Método de Müller</a></li>
+                        <li class="sub-title">Métodos Abiertos</li>
+                        <li><a href="#" onclick="loadMethod('newton')">Newton-Raphson</a></li>
+                        <li><a href="#" onclick="loadMethod('secante')">Método Secante</a></li>
+                        <li><a href="#" onclick="loadMethod('punto_fijo')">Punto Fijo</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li class="menu-item">
+                <details>
+                    <summary>Opción 3: Método de Polinomios</summary>
+                    <ul>
+                        <li><a href="#" onclick="loadMethod('bairstow')">Método de Bairstow</a></li>
+                        <li><a href="#" onclick="loadMethod('horner')">Método de Horner</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li class="menu-item">
+                <details>
+                    <summary>Opción 4: Sistemas No Lineales</summary>
+                    <ul>
+                        <li><a href="#" onclick="loadMethod('newton_multivariable')">Newton-Raphson Multivariable</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="content">
+        <header>
+            <h1 id="method-title">Selecciona un Método</h1>
+            <div class="actions">
+                <button class="btn btn-secondary" onclick="clearData()">Limpiar Datos</button>
+                <button class="btn btn-success" onclick="exportExcel()">Descargar Excel</button>
+            </div>
+        </header>
+
+        <!-- Entradas de Usuario -->
+        <section class="inputs-panel" id="inputs-container">
+            <p>Por favor, selecciona un método del menú lateral para comenzar.</p>
+        </section>
+
+        <!-- 1. PRIMERO LA TABLA DE RESULTADOS -->
+        <section class="results-panel">
+            <div class="table-responsive">
+                <table id="resultsTable">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 2. DESPUÉS EL ÁREA DE GRÁFICA -->
+        <section class="graph-panel">
+            <canvas id="mathChart"></canvas>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
